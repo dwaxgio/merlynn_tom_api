@@ -29,32 +29,32 @@ const ApiForm = () => {
   const apiKey = "9307bfd5fa011428ff198bb37547f979";
 
   // BASIC STRUCTURE //
-  const getModel = () => {
-    axios
-      .get(url + modelId, {
-        headers: { Authorization: "Bearer " + apiKey },
-      })
-      .then((response) => {
-        setResponseData(response.data);
-        console.log(response);
-        console.log(response.data.attributes.name);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  // const getModel = () => {
+  //   axios
+  //     .get(url + modelId, {
+  //       headers: { Authorization: "Bearer " + apiKey },
+  //     })
+  //     .then((response) => {
+  //       setResponseData(response.data);
+  //       console.log(response);
+  //       console.log(response.data.attributes.name);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
 
-  return (
-    <>
-      {<button onClick={getModel}>Get model</button>}
-      <p>Model data</p>   
-      {/* NOTE: In order to visualize the data, first I need to execute the fetch to the api
-        once I have the data locally, then I can show it in an html element
-      */}
-      {/* <p>{JSON.stringify(responseData.data.attributes.name)}</p>       */}
-      {/* WORKS */}
-    </>
-  );
+  // return (
+  //   <>
+  //     {<button onClick={getModel}>Get model</button>}
+  //     <p>Model data</p>
+  //     {/* NOTE: In order to visualize the data, first I need to execute the fetch to the api
+  //       once I have the data locally, then I can show it in an html element
+  //     */}
+  //     {/* <p>{JSON.stringify(responseData.data.attributes.name)}</p>       */}
+  //     {/* WORKS */}
+  //   </>
+  // );
 
   // BASIC STRUCTURE /
 
@@ -97,6 +97,29 @@ const ApiForm = () => {
   //     <button onClick={fetchData}>Get model</button>
   //   </>
   // );
+
+  // WITH useEffect
+
+  useEffect(() => {
+    try {
+      axios
+        .get(url + modelId, {
+          headers: { Authorization: "Bearer " + apiKey },
+        })
+        .then((response) => setResponseData(response));
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
+  return (
+    <>
+      <div>
+        {responseData && <p>{responseData.data.data.attributes.name}</p>}
+      </div>
+      <div>{responseData && JSON.stringify(responseData.data.data.attributes)}</div>
+    </>
+  );
 };
 
 export default ApiForm;
