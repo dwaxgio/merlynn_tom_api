@@ -2,27 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 const ApiForm = () => {
-  //   const [quote, setQuote] = useState("");
-  //   const getQuote = () => {
-  //     axios
-  //       .get("https://api.quotable.io/random")
-  //       .then((response) => {
-  //         console.log(response.data.content);
-  //         setQuote(response.data.content);
-  //       })
-  //       .catch((err) => {
-  //         console.log(err);
-  //       });
-  //   };
-  //   return (
-  //     <>
-  //       <button onClick={getQuote}>Get data</button>
-  //       {quote}
-  //     </>
-  //   );
-  //
-
   const [responseData, setResponseData] = useState("");
+  const [inputValues, setInputValues] = useState({});
 
   const url = "https://api.up2tom.com/v3/models/";
   const modelId = "58d3bcf97c6b1644db73ad12";
@@ -60,44 +41,6 @@ const ApiForm = () => {
 
   //
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await axios.get(url + modelId, {
-  //         headers: { Authorization: "Bearer " + apiKey },
-  //       });
-  //       console.log(response.data);
-  //       setResponseData(response.data);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-  //   //fetchData(); // Execute at the beginning
-  // }, []);
-
-  // return (
-  //   <>
-  //     {/* <button onClick={getModel}>Get model</button> */}
-  //     {/* <h1>Model Name: {responseData.attributes.name}</h1> */}
-  //     {/* <p>{setResponseData}</p> */}
-
-  //     <form>
-  //       {/* {responseData.map((variable) => (
-  //         <div key={variable.name}>
-  //           <label htmlFor={variable.name}>{variable.name}</label>
-  //           <input
-  //             type={variable.data_type}
-  //             id={variable.name}
-  //             name={variable.name}
-  //           />
-  //         </div>
-  //       ))} */}
-  //     </form>
-  //     {/* <p>{responseData.attributes}</p> */}
-  //     <button onClick={fetchData}>Get model</button>
-  //   </>
-  // );
-
   // WITH useEffect
 
   useEffect(() => {
@@ -112,12 +55,55 @@ const ApiForm = () => {
     }
   }, []);
 
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setInputValues((prevState) => ({ ...prevState, [name]: value }));
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log("Form submitted with values: ", inputValues);
+  };
+
   return (
     <>
       <div>
         {responseData && <p>{responseData.data.data.attributes.name}</p>}
       </div>
-      <div>{responseData && JSON.stringify(responseData.data.data.attributes)}</div>
+      {/* <div>
+        {responseData && JSON.stringify(responseData.data.data.attributes)}
+      </div> */}
+
+      <form onSubmit={handleSubmit}>
+        {responseData &&
+          responseData.data.data.attributes.metadata.attributes.map(
+            (attribute) => {
+              <div key={attribute.name}>
+                <label>{attribute.question}</label>
+                {attribute.type === "Nominal" && (
+                  <select name={attribute.name} onChange={handleInputChange}>
+                    {attribute.domain.values.map((value) => (
+                      <option key={value} value={value}>
+                        {value}
+                      </option>
+                    ))}
+                  </select>
+                )}
+                {attribute.type === "Continuous" && (
+                  <input
+                    type="number"
+                    name={attribute.name}
+                    min={attribute.domain.lower}
+                    max={attribute.domain.upper}
+                    step={attribute.domain.interval}
+                    onChange={handleInputChange}
+                  />
+                )}
+              </div>;
+            }
+          )}
+        <button type="submit">Submit</button>
+      </form>
     </>
   );
 };
