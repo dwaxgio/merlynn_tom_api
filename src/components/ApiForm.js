@@ -29,8 +29,11 @@ const ApiForm = () => {
 
   const getModel = () => {
     axios
-      //   .get("https://api.up2tom.com/models/58d3bcf97c6b1644db73ad12", {
-      .get(url, {
+      // .get("https://api.up2tom.com/models/58d3bcf97c6b1644db73ad12", {
+      // .get(url, {
+      // .get("/api/models/58d3bcf97c6b1644db73ad12", {
+      // .get("https://api.up2tom.com/v3/models", { //gets all models
+      .get("https://api.up2tom.com/v3/models/58d3bcf97c6b1644db73ad12", {
         headers: { Authorization: "Bearer 9307bfd5fa011428ff198bb37547f979" },
       })
       .then((response) => {
