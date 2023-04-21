@@ -1,14 +1,9 @@
-import logo from './logo.svg';
-import './App.css';
-import ApiForm from './components/ApiForm';
-// import dotenv from 'dotenv';
-// require('dotenv').config();
-
+import logo from "./logo.svg";
+import "./App.css";
+import ApiForm from "./components/ApiForm";
+import LoginForm from "./components/LoginForm";
 
 function App() {
-  // dotenv.config();
-  const apikey = process.env.REACT_APP_API_KEY;
-  console.log(apikey);
   return (
     <div className="App">
       <header className="App-header">
@@ -25,10 +20,11 @@ function App() {
           Learn React
         </a> */}
 
-        {<ApiForm/>}
-      </header>
+        {/* {<ApiForm />} */}
 
-      {/* <ApiForm/> */}
+        {/* <h1>Login Form</h1> */}
+        <LoginForm />
+      </header>
     </div>
   );
 }

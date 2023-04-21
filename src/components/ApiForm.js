@@ -6,10 +6,8 @@ const ApiForm = () => {
   const [inputValues, setInputValues] = useState({}); // Activate when using WITH useEffect
   const [decision, setDecision] = useState("");
 
-  // const url = "https://api.up2tom.com/v3/models/";
-  const url = process.env.REACT_APP_API_URL;  
+  const url = process.env.REACT_APP_API_URL;
   const modelId = "58d3bcf97c6b1644db73ad12";
-  // const apiKey = "9307bfd5fa011428ff198bb37547f979";
   const apiKey = process.env.REACT_APP_API_KEY;
   const urlPost = `https://api.up2tom.com/v3/decision/${modelId}`;
 
@@ -69,18 +67,14 @@ const ApiForm = () => {
       })
       .then((response) => {
         // Handle the response from the API
-        console.log("API response: ", response);
         console.log(
           "API response decision: ",
           response.data.data.attributes.decision
         );
         setDecision(response.data.data.attributes.decision);
-        console.log("Decision: ", decision);
       })
       .catch((error) => {
         console.log(error);
-        console.log("DATA SUBMITED: ", inputData);
-        console.log("DATA SUBMITED COMPLETE: ", postData);
       });
   };
 
