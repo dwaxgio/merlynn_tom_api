@@ -5,6 +5,7 @@ const ApiForm = () => {
   const [responseData, setResponseData] = useState("");
   const [inputValues, setInputValues] = useState({}); // Activate when using WITH useEffect
   const [inputs, setInputs] = useState({});
+  const [decision, setDecision] = useState("");
 
   const url = "https://api.up2tom.com/v3/models/";
   const modelId = "58d3bcf97c6b1644db73ad12";
@@ -111,7 +112,6 @@ const ApiForm = () => {
   //     });
   // };
 
-
   // // Object postData as array
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -126,8 +126,8 @@ const ApiForm = () => {
 
       const inputValue =
         attribute.type === "Continuous"
-          // ? parseFloat(inputValues[key]).toFixed(1)
-          ? parseFloat(inputValues[key])
+          ? // ? parseFloat(inputValues[key]).toFixed(1)
+            parseFloat(inputValues[key])
           : inputValues[key];
 
       inputData.push(inputValue);
@@ -143,8 +143,8 @@ const ApiForm = () => {
     };
 
     axios
-    .post(urlPost, postData, {
-      // .post(urlPost, JSON.stringify(postData), {
+      .post(urlPost, postData, {
+        // .post(urlPost, JSON.stringify(postData), {
         headers: {
           Authorization: "Bearer " + apiKey,
           "Content-Type": "application/vnd.api+json",
@@ -153,6 +153,12 @@ const ApiForm = () => {
       .then((response) => {
         // Handle the response from the API
         console.log("API response: ", response);
+        console.log(
+          "API response decision: ",
+          response.data.data.attributes.decision
+        );
+        setDecision(response.data.data.attributes.decision);
+        console.log("Decision: ", decision);
       })
       .catch((error) => {
         console.log(error);
@@ -204,6 +210,7 @@ const ApiForm = () => {
           )}
         <button type="submit">Submit</button>
       </form>
+      {decision && <h2>{decision}</h2>}
     </>
   );
 
