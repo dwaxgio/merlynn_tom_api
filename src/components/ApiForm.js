@@ -3,12 +3,16 @@ import axios from "axios";
 
 const ApiForm = () => {
   const [responseData, setResponseData] = useState("");
-  const [inputValues, setInputValues] = useState({});
+  const [inputValues, setInputValues] = useState({}); // Activate when using WITH useEffect
   const [inputs, setInputs] = useState({});
 
   const url = "https://api.up2tom.com/v3/models/";
   const modelId = "58d3bcf97c6b1644db73ad12";
   const apiKey = "9307bfd5fa011428ff198bb37547f979";
+
+  const urlPost = `https://api.up2tom.com/v3/decision/${modelId}`;
+
+  // const inputData = {};
 
   // BASIC STRUCTURE //
   // const getModel = () => {
@@ -63,7 +67,45 @@ const ApiForm = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("Form submitted with values: ", inputValues);
+
+    const inputData = {};
+
+    Object.keys(inputValues).forEach((key) => {
+      const attribute =
+        responseData.data.data.attributes.metadata.attributes.find(
+          (attr) => attr.name === key
+        );
+
+      inputData[key] =
+        attribute.type === "Continuous"
+          ? parseFloat(inputValues[key]).toFixed(1)
+          : inputValues[key];
+    });
+
+    const postData = {
+      data: {
+        type: "scenario",
+        attributes: {
+          input: inputData,
+        },
+      },
+    };
+
+    axios
+      .post(urlPost, postData, {
+        headers: {
+          Authorization: "Bearer " + apiKey,
+          "Content-Type": "application/vnd.api+json",
+        },
+      })
+      .then((response) => {
+        // Handle the response from the API
+        console.log("API response: ", response);
+      })
+      .catch((error) => {
+        console.log(error);
+        console.log("DATA SUBMITED: ", inputData);
+      });
   };
 
   return (
@@ -80,7 +122,13 @@ const ApiForm = () => {
               <div key={attribute.name}>
                 <label>{attribute.question}</label>
                 {attribute.type === "Nominal" && (
-                  <select name={attribute.name} onChange={handleInputChange}>
+                  // <select name={attribute.name} onChange={handleInputChange} defaultValue="">
+                  <select
+                    name={attribute.name}
+                    onChange={handleInputChange}
+                    value={inputValues[attribute.name] || ""}
+                  >
+                    <option value=""></option>
                     {attribute.domain.values.map((value) => (
                       <option key={value} value={value}>
                         {value}
@@ -128,9 +176,55 @@ const ApiForm = () => {
   //   }
   // }, []);
 
+  // // const handleSubmit = (event) => {
+  // //   event.preventDefault();
+  // //   console.log(inputs); // handle form submission here
+  // // };
+
   // const handleSubmit = (event) => {
   //   event.preventDefault();
-  //   console.log(inputs); // handle form submission here
+
+  //   const inputData = {};
+  //   // inputData = {};
+
+  //   Object.keys(inputValues).forEach((key) => {
+  //     const attribute =
+  //       responseData.data.data.attributes.metadata.attributes.find(
+  //         (attr) => attr.name === key
+  //       );
+
+  //     inputData[key] =
+  //       attribute.type === "Continuous"
+  //         ? parseFloat(inputValues[key]).toFixed(2)
+  //         : inputValues[key];
+  //   });
+
+  //   // console.log("DATA SUBMITED: ", inputData);
+
+  //   const postData = {
+  //     data: {
+  //       type: "scenario",
+  //       attributes: {
+  //         input: inputData,
+  //       },
+  //     },
+  //   };
+
+  //   axios
+  //     .post(urlPost, postData, {
+  //       headers: {
+  //         Authorization: "Bearer " + apiKey,
+  //         "Content-Type": "application/vnd.api+json",
+  //       },
+  //     })
+  //     .then((response) => {
+  //       // Handle the response from the API
+  //       console.log("API response: ", response);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //       // console.log("DATA SUBMITED: " , inputValues);
+  //     });
   // };
 
   // const handleInputChange = (event) => {
