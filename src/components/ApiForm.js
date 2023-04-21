@@ -1,15 +1,21 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import LoginForm from "./LoginForm";
 
 const ApiForm = () => {
   const [responseData, setResponseData] = useState("");
   const [inputValues, setInputValues] = useState({}); // Activate when using WITH useEffect
   const [decision, setDecision] = useState("");
+  const [loggedOut, setLoggedOut] = useState(false);
 
   const url = process.env.REACT_APP_API_URL;
   const modelId = "58d3bcf97c6b1644db73ad12";
   const apiKey = process.env.REACT_APP_API_KEY;
   const urlPost = `https://api.up2tom.com/v3/decision/${modelId}`;
+
+  
+
+  // API code
 
   useEffect(() => {
     try {
@@ -78,6 +84,16 @@ const ApiForm = () => {
       });
   };
 
+  // Logout handler
+
+  const handleLogout = () => {
+    setLoggedOut(true);
+  };
+
+  if (loggedOut) {
+    return <LoginForm />;
+  }
+
   return (
     <>
       <div>
@@ -122,6 +138,8 @@ const ApiForm = () => {
         <button type="submit">Submit</button>
       </form>
       {decision && <h2>Decision: {decision}</h2>}
+      <br />
+      <button onClick={handleLogout}>Log out</button>
     </>
   );
 };
