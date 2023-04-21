@@ -1,8 +1,14 @@
 import logo from './logo.svg';
 import './App.css';
 import ApiForm from './components/ApiForm';
+// import dotenv from 'dotenv';
+// require('dotenv').config();
+
 
 function App() {
+  // dotenv.config();
+  const apikey = process.env.REACT_APP_API_KEY;
+  console.log(apikey);
   return (
     <div className="App">
       <header className="App-header">
