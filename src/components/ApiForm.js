@@ -65,10 +65,58 @@ const ApiForm = () => {
     setInputValues((prevState) => ({ ...prevState, [name]: value }));
   };
 
+  // // Object postData as pair key and value
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+
+  //   const inputData = {};
+
+  //   Object.keys(inputValues).forEach((key) => {
+  //     const attribute =
+  //       responseData.data.data.attributes.metadata.attributes.find(
+  //         (attr) => attr.name === key
+  //       );
+
+  //     inputData[key] =
+  //       attribute.type === "Continuous"
+  //         ? parseFloat(inputValues[key]).toFixed(1)
+  //         : inputValues[key];
+  //   });
+
+  //   const postData = {
+  //     data: {
+  //       type: "scenario",
+  //       attributes: {
+  //         input: inputData,
+  //       },
+  //     },
+  //   };
+
+  //   axios
+  //     // .post(urlPost, postData, {
+  //     .post(urlPost, JSON.stringify(postData), {
+  //       headers: {
+  //         Authorization: "Bearer " + apiKey,
+  //         "Content-Type": "application/vnd.api+json",
+  //       },
+  //     })
+  //     .then((response) => {
+  //       // Handle the response from the API
+  //       console.log("API response: ", response);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //       console.log("DATA SUBMITED: ", inputData);
+  //       console.log("DATA SUBMITED COMPLETE: ", postData);
+  //     });
+  // };
+
+
+  // // Object postData as array
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const inputData = {};
+    const inputData = [];
 
     Object.keys(inputValues).forEach((key) => {
       const attribute =
@@ -76,10 +124,13 @@ const ApiForm = () => {
           (attr) => attr.name === key
         );
 
-      inputData[key] =
+      const inputValue =
         attribute.type === "Continuous"
-          ? parseFloat(inputValues[key]).toFixed(1)
+          // ? parseFloat(inputValues[key]).toFixed(1)
+          ? parseFloat(inputValues[key])
           : inputValues[key];
+
+      inputData.push(inputValue);
     });
 
     const postData = {
@@ -92,7 +143,8 @@ const ApiForm = () => {
     };
 
     axios
-      .post(urlPost, postData, {
+    .post(urlPost, postData, {
+      // .post(urlPost, JSON.stringify(postData), {
         headers: {
           Authorization: "Bearer " + apiKey,
           "Content-Type": "application/vnd.api+json",
@@ -105,6 +157,7 @@ const ApiForm = () => {
       .catch((error) => {
         console.log(error);
         console.log("DATA SUBMITED: ", inputData);
+        console.log("DATA SUBMITED COMPLETE: ", postData);
       });
   };
 
