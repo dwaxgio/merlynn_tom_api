@@ -1,95 +1,77 @@
 # How to set up and run the app:
 
-1.	Clone the repository using the following command: git clone https://github.com/dwaxgio/merlynn_tom_api.git.
-2.	Ensure that all dependencies are installed. You can execute the following command to install them: npm install.
-3.	Start the project by running the following command: npm start.
-4.	Once the project has started, you will see the login form. Please provide the following credentials: 
-a.	Username: merlynn 
-b.	Password: Merlynn123*
+1. Clone the repository using the following command: git clone https://github.com/dwaxgio/merlynn_tom_api.git.
+2. Ensure that all dependencies are installed. You can execute the following command to install them: npm install.
+3. Start the project by running the following command: npm start.
+4. Once the project has started, you will see the login form. Please provide the following credentials:
+   a. Username: merlynn
+   b. Password: Merlynn123\*
 
-![Login](./readme_images/1_login.png)
+![1_Login](./readme_images/1_login.png)
 
+Note: In case the credentials are incorrect, please validate them as the app will display an alert:
 
+![2_Login](./readme_images/2_login.png)
 
+5. After indicating the correct credentials and pressing the login button, the app will execute the first GET to the API to populate the form with:
+   a. Model name
+   b. Question labels
+   c. Options
+   d. Range/limits
 
+![3_form](./readme_images/3_form.png)
 
+Note: The form has validations to ensure that only input values corresponding to those accepted by the decision are registered, as shown below:
+
+![4_form_validation](./readme_images/4_form_validation.png)
+
+6. Fill in the fields with the requested data (according to the options provided if applicable or by entering the values manually):
+
+![4_2_form_option](./readme_images/4_2_form_option.png)
+
+7. Press the submit button:
+
+![5_form_filled](./readme_images/5_form_filled.png)
+
+Note: The form will show an alert if the validation of the indicated data represents an exception for the API, as shown below:
+
+![6_form_filled_exception](./readme_images/6_form_filled_exception.png)
+
+8. Once the data is submitted, the app will receive a response from the API indicating the decision to the user:
+
+![7_form_decision_response](./readme_images/7_form_decision_response.png)
+
+9. Press "Log Out" to return to the login form:
+
+![8_logout](./readme_images/8_logout.png)
+
+10. Additionally, you can follow the link to the GitHub repository indicated in the footer.
 
 # Additions added:
 
+1. Functionality to store data gathered from the TOM API: The application implements the useState hook to manage the data from the API, which contains the model information (attributes/metadata used to generate the form fields, options, limits, and types). The following useState hooks are used:
+   • const [responseData, setResponseData] = useState(""): It contains the data retrieved from the API.
+   • const [inputValues, setInputValues] = useState({}): It handles the data that the user indicates in the input.
+   • const [decision, setDecision] = useState(""): It has the response received from the API containing the decision used to display the result on the screen.
+   • const [error, setError] = useState(""): It saves the response from the decision in case the input values indicated by the user correspond to exceptions from the API.
 
+2. Security considerations:
+   • Validation for the input forms: The input forms are validated according to the documentation to control the data sent:
 
+![9_form_validation](./readme_images/9_form_validation.png)
 
+• Secure storage of API keys: The API key is stored securely in an environment variable or a configuration file, and it is not exposed in the code.
+o A .env file was added to the project to store the key and URL:
+
+![10_env_file](./readme_images/10_env_file.png)
+
+![11_env_file_form](./readme_images/11_env_file_form.png)
+
+Note: For the coding assessment, the values are indicated to set up the project, understanding that in a real scenario, this .env file and its corresponding values should not be exposed for security reasons.
+• Login functionality added: In order to control only the registered user/password in the app (for assessment purposes, the credentials are hard-coded, understanding that in a production environment, they should be encrypted and handled differently).
+
+![12_login_validation](./readme_images/12_login_validation.png)
 
 # Bonus:
 
-___
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+• The UI for the project was created using TailwindCSS.
