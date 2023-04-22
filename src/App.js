@@ -13,7 +13,7 @@ function App() {
         <img
           src={merlynnlogo}
           alt="Merlynn"
-          className="w-30 h-20 absolute top-10 right-10"
+          className="w-15 h-10 absolute top-10 right-10"
         />
       </div>
 

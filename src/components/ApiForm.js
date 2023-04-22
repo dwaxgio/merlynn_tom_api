@@ -7,6 +7,7 @@ const ApiForm = () => {
   const [inputValues, setInputValues] = useState({});
   const [decision, setDecision] = useState("");
   const [loggedOut, setLoggedOut] = useState(false);
+  const [error, setError] = useState("");
 
   const url = process.env.REACT_APP_API_URL;
   const modelId = "58d3bcf97c6b1644db73ad12";
@@ -74,9 +75,14 @@ const ApiForm = () => {
           response.data.data.attributes.decision
         );
         setDecision(response.data.data.attributes.decision);
+        setError("");
       })
       .catch((error) => {
         console.log(error);
+        setDecision("");
+        setError(
+          "Please verify the data entered and their agreement (for example, if it indicates 'Gender?: male', in the field 'Pregnant?' select 'NA'), or in the case of 'Number of drinks consumed today?' indicate a value equal to or less than in 'Number of drink consumed per day?' "
+        );
       });
   };
 
@@ -149,6 +155,8 @@ const ApiForm = () => {
           Decision: {decision}
         </h2>
       )}
+      <br />
+      {error && <div style={{ color: "red" }}>{error}</div>}
       <br />
       <button
         onClick={handleLogout}
