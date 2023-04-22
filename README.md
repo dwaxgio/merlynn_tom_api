@@ -11,7 +11,7 @@
 
 Note: In case the credentials are incorrect, please validate them as the app will display an alert:
 
-![2_login](./readme_images/2_login.png)
+<!-- ![2_login](./readme_images/2_login.png) -->
 
 5. After indicating the correct credentials and pressing the login button, the app will execute the first GET to the API to populate the form with:
    a. Model name
