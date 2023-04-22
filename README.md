@@ -5,7 +5,7 @@
 3. Start the project by running the following command: npm start.
 4. Once the project has started, you will see the login form. Please provide the following credentials:
    a. Username: merlynn
-   b. Password: Merlynn123\*
+   b. Password: Merlynn123*
 
 ![1_Login](./readme_images/1_login.png)
 
