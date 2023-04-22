@@ -45,8 +45,7 @@ const ApiForm = () => {
 
       const inputValue =
         attribute.type === "Continuous"
-          ? // ? parseFloat(inputValues[key]).toFixed(1)
-            parseFloat(inputValues[key])
+          ? parseFloat(inputValues[key])
           : inputValues[key];
 
       inputData.push(inputValue);
@@ -63,7 +62,6 @@ const ApiForm = () => {
 
     axios
       .post(urlPost, postData, {
-        // .post(urlPost, JSON.stringify(postData), {
         headers: {
           Authorization: "Bearer " + apiKey,
           "Content-Type": "application/vnd.api+json",
@@ -96,10 +94,12 @@ const ApiForm = () => {
     <div>
       <div>
         {responseData && (
-          <h1 className="text-4xl font-bold text-blue-700">Model name: {responseData.data.data.attributes.name}</h1>
+          <h1 className="text-4xl font-bold text-blue-700">
+            Model name: {responseData.data.data.attributes.name}
+          </h1>
         )}
       </div>
-      <br/>
+      <br />
       <form onSubmit={handleSubmit}>
         {responseData &&
           responseData.data.data.attributes.metadata.attributes.map(
@@ -107,7 +107,6 @@ const ApiForm = () => {
               <div key={attribute.name}>
                 <label>{attribute.question}</label>
                 {attribute.type === "Nominal" && (
-                  // <select name={attribute.name} onChange={handleInputChange} defaultValue="">
                   <select
                     class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
                     name={attribute.name}
@@ -145,7 +144,11 @@ const ApiForm = () => {
         </button>
       </form>
       <br />
-      {decision && <h2 className="text-3xl font-bold text-blue-500">Decision: {decision}</h2>}
+      {decision && (
+        <h2 className="text-3xl font-bold text-blue-500">
+          Decision: {decision}
+        </h2>
+      )}
       <br />
       <button
         onClick={handleLogout}

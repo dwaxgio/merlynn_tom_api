@@ -7,7 +7,7 @@ module.exports = {
         "app-bg": "rgb(15 23 42)",
       },
       colors: {
-        custom: 'rgb(15 23 42)',
+        custom: "rgb(15 23 42)",
       },
     },
   },

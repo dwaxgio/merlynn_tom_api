@@ -24,7 +24,6 @@ const LoginForm = () => {
     <form onSubmit={handleSubmit}>
       <label>
         {/* Username: */}
-
         <input
           class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
           placeholder="Username"
@@ -51,7 +50,6 @@ const LoginForm = () => {
       <br />
       {error && <div style={{ color: "red" }}>{error}</div>}
       <br />
-      {/* <button type="submit">Log in</button> */}
       <button
         type="submit"
         class="px-4 py-1 text-sm text-blue-600 font-semibold rounded-full border border-blue-200 hover:text-white hover:bg-blue-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 "
