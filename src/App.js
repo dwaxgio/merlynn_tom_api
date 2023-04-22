@@ -2,7 +2,6 @@ import logo from "./logo.svg";
 import "./App.css";
 import ApiForm from "./components/ApiForm";
 import LoginForm from "./components/LoginForm";
-import TailwindcssFundamentals from "./components/TailwindcssFundamentals";
 import Footer from "./components/Footer";
 import merlynnlogo from "./MERLYNN_LOGO.png";
 

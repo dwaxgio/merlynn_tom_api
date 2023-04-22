@@ -1,3 +1,28 @@
+# How to set up and run the app:
+
+1.	Clone the repository using the following command: git clone https://github.com/dwaxgio/merlynn_tom_api.git.
+2.	Ensure that all dependencies are installed. You can execute the following command to install them: npm install.
+3.	Start the project by running the following command: npm start.
+4.	Once the project has started, you will see the login form. Please provide the following credentials: 
+a.	Username: merlynn 
+b.	Password: Merlynn123*
+
+![Login](./readme_images/1_login.png)
+
+
+
+
+
+
+# Additions added:
+
+
+
+
+
+# Bonus:
+
+___
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
