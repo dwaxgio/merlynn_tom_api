@@ -10,8 +10,9 @@ const ApiForm = () => {
   const [error, setError] = useState("");
 
   const url = process.env.REACT_APP_API_URL;
-  const modelId = "58d3bcf97c6b1644db73ad12";
   const apiKey = process.env.REACT_APP_API_KEY;
+  const modelId = "58d3bcf97c6b1644db73ad12";
+
   const urlPost = `https://api.up2tom.com/v3/decision/${modelId}`;
 
   // API code
