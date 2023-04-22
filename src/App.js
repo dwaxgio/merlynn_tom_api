@@ -15,16 +15,16 @@ function App() {
       <div className="relative">
         <img
           src={merlynnlogo}
-          alt="Your image"
+          alt="Merlynn"
           className="w-30 h-20 absolute top-10 right-10"
         />
       </div>
 
       {/* Main content */}
       <div className="flex-grow bg-custom flex items-center justify-center">
-        <div className="p-6 max-w-lg w-full mx-auto bg-white rounded-xl shadow-lg flex items-center space-x-4 justify-center">
-          {/* <LoginForm /> */}
-          <ApiForm />
+        <div className="p-6 max-w-lg w-full mx-auto bg-white rounded-xl shadow-lg flex items-center space-x-4 justify-center text-center">
+          <LoginForm />
+          {/* <ApiForm /> */}
         </div>
       </div>
 
