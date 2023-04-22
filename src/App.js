@@ -2,29 +2,34 @@ import logo from "./logo.svg";
 import "./App.css";
 import ApiForm from "./components/ApiForm";
 import LoginForm from "./components/LoginForm";
+import TailwindcssFundamentals from "./components/TailwindcssFundamentals";
+import Footer from "./components/Footer";
+import merlynnlogo from "./MERLYNN_LOGO.png";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        {/* <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a> */}
+    <div className="flex flex-col min-h-screen justify-center">
+      {/* Header */}
+      {/* ... */}
 
-        {/* {<ApiForm />} */}
+      <div className="relative">
+        <img
+          src={merlynnlogo}
+          alt="Your image"
+          className="w-30 h-20 absolute top-10 right-10"
+        />
+      </div>
 
-        {/* <h1>Login Form</h1> */}
-        <LoginForm />
-      </header>
+      {/* Main content */}
+      <div className="flex-grow bg-custom flex items-center justify-center">
+        <div className="p-6 max-w-lg w-full mx-auto bg-white rounded-xl shadow-lg flex items-center space-x-4 justify-center">
+          {/* <LoginForm /> */}
+          <ApiForm />
+        </div>
+      </div>
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 }
